@@ -19,7 +19,12 @@
                 "prev": "Previous slide"
             }
         },
-        "slides": []
+        "slides": [
+            { "url": "#", "text": "one"},
+            { "url": "#", "text": "two"},
+            { "url": "#", "text": "three"},
+            { "url": "#", "text": "four"}
+        ]
     },
     "contact": {},
     "copyright": {

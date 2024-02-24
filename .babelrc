@@ -1,0 +1,10 @@
+{
+    "plugins": [
+        "@babel/transform-runtime",
+        [
+            "@babel/plugin-syntax-import-attributes",
+            { "deprecatedAssertSyntax": true }
+        ]
+    ],
+    "presets": [["@babel/env", { "targets": { "node": "current" } }]]
+}

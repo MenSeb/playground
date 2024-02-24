@@ -1,0 +1,14 @@
+@mixin highlight(
+    $color,
+    $background,
+    $decoration: null,
+    $shadow: null,
+    $selector: '*'
+) {
+    #{$selector}::selection {
+        background-color: #{$background};
+        color: #{$color};
+        text-decoration: #{$decoration};
+        text-shadow: #{$shadow};
+    }
+}

@@ -1,0 +1,16 @@
+@use '@tools/styles' as *;
+
+.separator {
+    width: 90%;
+    border-top: 2px solid var(--color-green-dark);
+    margin: var(--spacing-half) 0;
+
+    &-sub {
+        width: 80%;
+        border-width: 1px;
+    }
+
+    @include media-max(tablet) {
+        margin: var(--spacing) 0;
+    }
+}

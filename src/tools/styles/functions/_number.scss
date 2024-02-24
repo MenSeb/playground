@@ -1,0 +1,23 @@
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'error';
+
+$_rounding-functions: (ceil, floor, round);
+
+@function to-fixed($number, $decimals: 2, $rounding-function: round) {
+    @if not list.index($_rounding-functions, $rounding-function) {
+        @error error.message('rounding function', $rounding-function, $_rounding-functions);
+    }
+
+    $indice: 1;
+
+    @for $i from 0 to $decimals {
+        $indice: $indice * 10;
+    }
+
+    $round-function: meta.get-function($rounding-function);
+    $round-number: meta.call($round-function, ($number * $indice));
+
+    @return math.div($round-number, $indice);
+}

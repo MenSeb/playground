@@ -1,0 +1,56 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:base",
+        ":disableRateLimiting",
+        ":preserveSemverRanges",
+        "schedule:nonOfficeHours"
+    ],
+    "packageRules": [
+        {
+            "automerge": true,
+            "matchUpdateTypes": ["digest", "minor", "patch", "pin"]
+        },
+        {
+            "automerge": true,
+            "matchDepTypes": ["devDependencies"]
+        },
+        {
+            "matchPackagePrefixes": ["@babel, babel"],
+            "groupName": "Babel packages"
+        },
+        {
+            "matchPackagePrefixes": ["@commitlint"],
+            "groupName": "Commitlint packages"
+        },
+        {
+            "matchPackagePrefixes": ["ember"],
+            "groupName": "Ember packages"
+        },
+        {
+            "matchPackagePrefixes": ["eslint"],
+            "groupName": "ESLint packages"
+        },
+        {
+            "matchPackagePrefixes": ["markdownlint"],
+            "groupName": "Markdownlint packages"
+        },
+        {
+            "matchPackagePrefixes": ["prettier"],
+            "groupName": "Prettier packages"
+        },
+        {
+            "matchPackagePrefixes": ["sass"],
+            "groupName": "SASS packages"
+        },
+        {
+            "matchPackagePrefixes": ["stylelint"],
+            "groupName": "Stylelint packages"
+        },
+        {
+            "matchPackagePrefixes": ["webpack"],
+            "groupName": "Webpack packages"
+        }
+    ],
+    "timezone": "Canada/Eastern"
+}

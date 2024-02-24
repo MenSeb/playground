@@ -1,0 +1,32 @@
+@mixin css-variables(
+    $variables,
+    $key-prefix: null,
+    $val-prefix: null,
+    $key-suffix: null,
+    $val-suffix: null,
+    $key-delimiter: '-',
+    $val-delimiter: '-'
+) {
+    @each $variable-key, $variable-val in $variables {
+        $key: $variable-key;
+        $val: $variable-val;
+
+        @if $key-prefix {
+            $key: '#{$key-prefix}#{$key-delimiter}#{$key}';
+        }
+
+        @if $key-suffix {
+            $key: '#{$key}#{$key-delimiter}#{$key-suffix}';
+        }
+
+        @if $val-prefix {
+            $val: '#{$val-prefix}#{$val-delimiter}#{$val}';
+        }
+
+        @if $val-suffix {
+            $val: '#{$val}#{$val-delimiter}#{$val-suffix}';
+        }
+
+        --#{$key}: #{$val};
+    }
+}

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="{{ description }}" />
+        <meta name="robots" content="noindex, nofollow, nosnippet" />
+        <title>{{ title }}</title>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="@images/favicon.ico" />
+        <link rel="stylesheet" href="@styles/index.scss" />
+    </head>
+    <body>
+        {{> icons }}
+        <header class="header">
+            <div class="wrapper header-wrapper">
+                {{!-- {{> logo }}
+                {{> nav-primary class="nav-header" }}
+                {{> menu-button }}
+                {{> menu}} --}}
+            </div>
+        </header>
+        <main>
+            {{!-- {{> carousel id="carousel-banner" }} --}}
+            <div class="wrapper">
+                {{!-- {{#>main}}
+                {{> @partial-block }}
+                {{/main}} --}}
+            </div>
+        </main>
+        <footer>
+            <div class="wrapper">
+                {{!--
+                <div class="container">
+                    <img
+                        class="image image-logo"
+                        src="@images/{{ brand.logo }}"
+                        alt="{{ brand.name }}"
+                    />
+                    {{> separator }}
+                    {{> contact }}
+                </div>
+                {{> separator }}
+                <div class="container">
+                    {{> nav-social }}
+                </div>
+                {{> separator }}
+                <div class="container">
+                    {{> nav-policy }}
+                </div>
+                {{> separator }}
+                <div class="container">
+                    {{> copyright }}
+                    {{> separator class="separator-sub" }}
+                    {{> author }}
+                </div>
+                --}}
+            </div>
+        </footer>
+        <script src="@scripts/index.js"></script>
+    </body>
+</html>

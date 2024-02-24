@@ -1,0 +1,79 @@
+---
+name: CI
+# description: Continuous Integration.
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches:
+            - '*'
+
+jobs:
+    # Filters and outputs each type of changes to trigger
+    # the associated task later in the CI workflow job
+    filter:
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: read
+        outputs:
+            changes: ${{ steps.filter.outputs.changes }}
+            markdown: ${{ steps.filter.outputs.markdown }}
+            markup: ${{ steps.filter.outputs.markup }}
+            javascript: ${{ steps.filter.outputs.javascript }}
+            styles: ${{ steps.filter.outputs.styles }}
+            yaml: ${{ steps.filter.outputs.yaml }}
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+            - name: Filter Changes
+              uses: dorny/paths-filter@v2
+              id: filter
+              with:
+                  filters: |
+                      markdown:
+                        - "**.md"
+                      markup:
+                        - "**.hbs"
+                      javascript:
+                        - "**.js"
+                      styles:
+                        - "**.css"
+                        - "**.sass"
+                        - "**.scss"
+                      yaml:
+                        - "**.yaml"
+                        - "**.yml"
+
+    # Start if the filter outputs a change from the main branch.
+    ci:
+        needs: filter
+        if: ${{ needs.filter.outputs.changes != '[]' }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Setup
+              uses: ./.github/actions/setup
+            - name: Install
+              run: npm ci
+            - name: Lint Markdown
+              if: ${{ needs.filter.outputs.markdown == 'true' }}
+              run: npm run lint:markdown
+            - name: Lint Markup
+              if: ${{ needs.filter.outputs.markup == 'true' }}
+              run: npm run lint:markup
+            - name: Lint Styles
+              if: ${{ needs.filter.outputs.styles == 'true' }}
+              run: npm run lint:styles
+            - name: Lint YAML
+              if: ${{ needs.filter.outputs.yaml == 'true' }}
+              run: npm run lint:yaml
+            - name: Lint JavaScript
+              if: ${{ needs.filter.outputs.javascript == 'true' }}
+              run: npm run lint:js
+            - name: Build
+              if: ${{ needs.filter.outputs.javascript == 'true' ||
+                  needs.filter.outputs.markup == 'true' ||
+                  needs.filter.outputs.styles == 'true' }}
+              run: npm run build

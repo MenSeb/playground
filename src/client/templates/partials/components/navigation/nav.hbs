@@ -1,0 +1,13 @@
+<nav aria-label="{{ label }}" class="nav {{ class }}" {{#if id}}id="{{ id }}"{{/if}}>
+    <ul class="list nav-list">
+        {{#each links as |link|}}
+        <li class="item nav-item">
+            {{#if @partial-block }}
+            {{> @partial-block link=link }}
+            {{else}}
+            <a class="link nav-link" href="{{ link.url }}">{{ link.text }}</a>
+            {{/if}}
+        </li>
+        {{/each}}
+    </ul>
+</nav>

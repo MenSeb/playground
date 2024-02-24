@@ -1,0 +1,27 @@
+@use '@tools/styles' as *;
+
+.logo {
+    @extend %flex-center;
+
+    height: 100%;
+    text-decoration: none;
+    gap: var(--spacing-half);
+    color: var(--color-blue-dark);
+    transition: color var(--time-transition) ease-in-out;
+    z-index: 2; // Keep the logo over the menu panel
+
+    .image {
+        height: 100%;
+    }
+
+    .brand {
+        font-size: 1.25em;
+        display: none;
+    }
+
+    @include media-max(mobile) {
+        .brand {
+            display: none;
+        }
+    }
+}

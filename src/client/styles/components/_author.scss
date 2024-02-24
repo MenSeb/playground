@@ -1,0 +1,15 @@
+@use '@tools/styles' as *;
+
+.author {
+    @extend %flex-center;
+
+    flex-wrap: wrap;
+    gap: 0.25em;
+    text-align: center;
+
+    @include media-max(mobile) {
+        .span:last-child {
+            width: 100%;
+        }
+    }
+}

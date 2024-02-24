@@ -1,0 +1,17 @@
+# Environment
+.env
+
+# Jest
+coverage
+
+# NodeJS
+node_modules
+
+# TypeDoc
+docs
+
+# TypeScript
+lib
+
+# Webpack
+dist

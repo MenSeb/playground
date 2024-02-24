@@ -1,0 +1,39 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'number';
+@use 'unit';
+@use '../variables/fluid' as *;
+
+@function clamped(
+    $value-min,
+    $value-max,
+    $breakpoint-min,
+    $breakpoint-max,
+    $unit-value,
+    $unit-slope,
+    $decimals: 2
+) {
+    $slope: math.div(
+        $value-max - $value-min,
+        $breakpoint-max - $breakpoint-min
+    );
+    $intercept: $value-min - $slope * $breakpoint-min;
+    $value-slope: number.to-fixed(
+        unit.convert(unit.strip($slope) * 100, $unit-slope),
+        $decimals
+    );
+    $value-intercept: number.to-fixed(
+        unit.convert($intercept, $unit-value),
+        $decimals
+    );
+
+    @return clamp(
+        #{number.to-fixed(unit.convert($value-min, $unit-value), $decimals)},
+        #{$value-slope} + #{$value-intercept},
+        #{number.to-fixed(unit.convert($value-max, $unit-value), $decimals)}
+    );
+}
+
+@function fluid($options) {
+    @return clamped(map.merge($fluid, $options)...);
+}

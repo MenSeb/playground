@@ -1,0 +1,40 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "plugin:yml/standard"
+    ],
+    "ignorePatterns": ["!.github"],
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true,
+        "node": true
+    },
+    "overrides": [
+        {
+            "files": ["*.yaml", "*.yml"],
+            "parser": "yaml-eslint-parser",
+            "rules": {
+                "yml/indent": ["error", 4, { "indicatorValueIndent": 2 }],
+                "yml/quotes": ["error", { "prefer": "single" }]
+            }
+        }
+    ],
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "plugins": ["prettier"],
+    "root": true,
+    "rules": {
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        "comma-dangle": ["error", "always-multiline"],
+        "no-cond-assign": ["error", "always"],
+        "no-console": "error"
+    }
+}

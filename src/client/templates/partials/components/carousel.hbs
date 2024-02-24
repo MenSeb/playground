@@ -1,0 +1,57 @@
+{{assign 'length' (len carousel.slides) }}
+<section
+    id="{{ id }}"
+    class="carousel"
+    aria-label="{{ carousel.label }}"
+    aria-roledescription="carousel"
+>
+    <div
+        class="carousel-slides"
+        aria-atomic="false"
+        aria-live="polite"
+        style="width: calc({{ @root.length }} * 100%);"
+    >
+        {{#each carousel.slides as |slide| }}
+        <div
+            id="{{ ../id }}-slide-{{ @index }}"
+            class="carousel-slide"
+            role="group"
+            aria-label="{{idx @index}} of {{ @root.length }}"
+            aria-roledescription="slide"
+        >
+            <a class="carousel-link" href="{{ slide.url }}">{{ slide.text }}</a>
+            {{!--
+            <p class="carousel-text">{{ slide.text }}</p>
+            --}}
+        </div>
+        {{/each}}
+    </div>
+
+    <div class="carousel-controls">
+        {{#each carousel.labels.controls }}
+        <button
+            class="carousel-button carousel-control"
+            data-control="{{ @key }}"
+            aria-label="{{ this }}"
+            type="button"
+        >
+            {{> icon name=@key class="carousel-icon" }}
+        </button>
+        {{/each}}
+        <div
+            class="carousel-pickers"
+            role="group"
+            aria-label="{{ carousel.labels.picker }}"
+        >
+            {{#each carousel.slides as |slide| }}
+            <button
+                class="carousel-button carousel-picker"
+                data-index="{{ @index }}"
+                aria-disabled="{{#if @first}}true{{else}}false{{/if}}"
+                aria-labelledby="{{ ../id }}-slide-{{ @index }}"
+                type="button"
+            ></button>
+            {{/each}}
+        </div>
+    </div>
+</section>

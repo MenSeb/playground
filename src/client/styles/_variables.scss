@@ -1,0 +1,73 @@
+@use '@tools/styles' as *;
+
+// Colors
+$colors: (
+    blue: #068099,
+    blue-dark: #056073,
+    blue-light: #8cd0e5,
+    green: #00aba4,
+    green-dark: #15444c,
+    green-light: #55bcbb,
+    gold: #fab707,
+    yellow: #ffd61f,
+    yellow-dark: #fcc402,
+    yellow-light: #ffe576,
+    white: #fff,
+    black: #000,
+);
+
+// Spacings
+$spacings: (
+    quart: calc(var(--spacing) / 4),
+    half: calc(var(--spacing) / 2),
+    double: calc(var(--spacing) * 2),
+    xsmall: 5px,
+    mobile: 10px,
+    small: 10px,
+    tablet: 15px,
+    medium: 15px,
+    desktop: 20px,
+    large: 20px,
+    monitor: 25px,
+    xlarge: 30px,
+);
+
+// Sizes
+$sizes: (
+    header-height:
+        fluid(
+            (
+                value-min: 100px,
+                value-max: 150px,
+                breakpoint-min: breakpoint(mobile),
+                breakpoint-max: breakpoint(desktop),
+                unit-value: px,
+            )
+        ),
+    footer-height:
+        fluid(
+            (
+                value-min: 40px,
+                value-max: 60px,
+                breakpoint-min: breakpoint(mobile),
+                breakpoint-max: breakpoint(desktop),
+                unit-value: px,
+            )
+        ),
+    menu-button:
+        fluid(
+            (
+                value-min: 35px,
+                value-max: 50px,
+                breakpoint-max: breakpoint(medium),
+                unit-value: px,
+            )
+        ),
+    carousel-height: 600px,
+);
+
+// Times
+$times: (
+    transition: 0.25s,
+    spinner: 1s,
+);

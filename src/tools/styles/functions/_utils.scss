@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'error';
+
+@function map-getter($map, $key) {
+    @if map.has-key($map, $key) {
+        @return map.get($map, $key);
+    }
+
+    @error error.message(key, $key, map.keys($map));
+}
+
+@function map-setter($map, $key, $val, $force: true) {
+    @if not $force and map.has-key($map, $key) {
+        @error "Warning override, key {#{$key}} already exists in map (#{map.keys($map)}).";
+    }
+
+    @return map.set($map, $key, $val);
+}

@@ -1,0 +1,45 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'error';
+
+$_units: (
+    ch: 1ch,
+    cm: 1cm,
+    em: 1em,
+    ex: 1ex,
+    in: 1in,
+    mm: 1mm,
+    pc: 1pc,
+    pt: 1pt,
+    px: 1px,
+    rem: 1rem,
+    vh: 1vh,
+    vmax: 1vmax,
+    vmin: 1vmin,
+    vw: 1vw,
+);
+
+@function convert($value, $unit, $base: 16) {
+    @if not $unit or math.unit($value) == $unit {
+        @return $value;
+    }
+
+    @if not map.has-key($_units, $unit) {
+        @error error.message(unit, $unit, map.keys($_units));
+    }
+
+    $value-strip: math.div(
+        strip($value),
+        if(math.unit($value) == px, $base, 1)
+    );
+
+    @return $value-strip * map.get($_units, $unit);
+}
+
+@function strip($value) {
+    @return if(
+        math.is-unitless($value),
+        $value,
+        math.div($value, $value * 0 + 1)
+    );
+}

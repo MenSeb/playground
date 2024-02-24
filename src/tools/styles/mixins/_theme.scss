@@ -1,0 +1,24 @@
+@use '../functions/color' as *;
+@use './utils' as *;
+
+@mixin theme-color($name, $color, $ratio-dark: 5%, $ratio-light: 5%) {
+    @include css-variables(
+        (
+            color-#{$name}: $color,
+            color-#{$name}-dark: color-theme($color, -$ratio-dark),
+            color-#{$name}-light: color-theme($color, $ratio-light)
+        )
+    );
+}
+
+@mixin theme-image($brightness: 0.75, $contrast: 1.25) {
+    @media (prefers-color-scheme: dark) {
+        filter: brightness(#{$brightness}) contrast(#{$contrast});
+    }
+}
+
+@mixin theme($colors) {
+    @each $color in $colors {
+        @include theme-color($color...);
+    }
+}

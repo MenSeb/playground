@@ -1,0 +1,5 @@
+@use 'sass:color';
+
+@function color-theme($color, $color-ratio) {
+    @return color.adjust($color, $lightness: $color-ratio);
+}

@@ -1,0 +1,12 @@
+@use '@tools/styles' as *;
+
+[class*='page'] {
+    @extend %flex-center;
+
+    flex-direction: column;
+    gap: var(--spacing-double);
+
+    p {
+        text-align: justify;
+    }
+}

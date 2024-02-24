@@ -1,0 +1,13 @@
+{{#with navs.social }}
+{{#>nav class="nav-social" }}
+<a
+    aria-label="{{ link.text }}"
+    class="link nav-link"
+    href="{{ link.url }}"
+    rel="noopener noreferrer"
+    target="_blank"
+>
+    {{>icon name=link.icon }}
+</a>
+{{/nav}}
+{{/with}}

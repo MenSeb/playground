@@ -1,0 +1,38 @@
+@use '../variables/breakpoints' as *;
+
+@mixin media-breakpoint(
+    $type,
+    $range,
+    $breakpoint,
+    $breakpoints: $breakpoints
+) {
+    @media only screen and (#{$range}-#{$type}: #{breakpoint($breakpoint)}) {
+        @content;
+    }
+}
+
+@mixin media-min($breakpoint, $type: width) {
+    @include media-breakpoint(
+        $type: $type,
+        $range: min,
+        $breakpoint: $breakpoint
+    ) {
+        @content;
+    }
+}
+
+@mixin media-max($breakpoint, $type: width) {
+    @include media-breakpoint(
+        $type: $type,
+        $range: max,
+        $breakpoint: $breakpoint
+    ) {
+        @content;
+    }
+}
+
+@mixin media-mid($br-min, $br-max, $type: width) {
+    @media only screen and (min-#{$type}: #{breakpoint($br-min)}) and (max-#{$type}: #{breakpoint($br-max)}) {
+        @content;
+    }
+}

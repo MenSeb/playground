@@ -1,0 +1,42 @@
+@use '@tools/styles' as *;
+
+.contact {
+    @extend %flex-center;
+
+    flex-direction: column;
+
+    &-infos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-info {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-small);
+        padding: var(--spacing-half) var(--spacing);
+        color: var(--color-blue-dark);
+        text-decoration: none;
+
+        &:not(:last-child) {
+            border-bottom: thin solid var(--color-green-dark);
+        }
+    }
+
+    &-icon {
+        --size-icon: 1.75em;
+
+        height: var(--size-icon);
+        min-width: var(--size-icon);
+    }
+
+    @include media-max(tablet) {
+        &-info {
+            padding: var(--spacing);
+        }
+
+        &-icon {
+            --size-icon: 1.5em;
+        }
+    }
+}

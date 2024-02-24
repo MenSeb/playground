@@ -1,0 +1,14 @@
+@use '@tools/styles' as *;
+
+.header {
+    @extend %flex-center;
+
+    height: var(--size-header-height);
+
+    @include media-max(medium) {
+        .wrapper {
+            padding: 0 var(--spacing);
+            justify-content: space-between;
+        }
+    }
+}

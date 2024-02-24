@@ -1,0 +1,60 @@
+@use '@tools/styles' as *;
+
+.nav {
+    &-list,
+    &-item {
+        display: flex;
+    }
+
+    &-list {
+        gap: var(--spacing-half);
+    }
+
+    &-link {
+        @extend %flex-center;
+
+        text-align: center;
+        text-decoration: none;
+        padding: var(--spacing-half);
+    }
+
+    &-header {
+        display: flex;
+        flex: 1 1 100%;
+        justify-content: flex-end;
+    }
+
+    &-social {
+        .link {
+            color: var(--color-blue-dark);
+
+            &:hover {
+                color: var(--color-blue);
+            }
+        }
+
+        .icon {
+            height: 1.75em;
+        }
+    }
+
+    @include media-max(medium) {
+        &-header {
+            display: none;
+        }
+
+        &-policy {
+            .list {
+                align-items: center;
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        &-social {
+            .icon {
+                height: 1.5em;
+            }
+        }
+    }
+}

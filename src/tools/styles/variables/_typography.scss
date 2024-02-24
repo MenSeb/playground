@@ -1,0 +1,15 @@
+@use 'sass:map';
+@use '../functions/utils' as *;
+
+$typography: () !default;
+$typography: map.merge(
+    (
+        font-size: 16px,
+        font-ratio: 1.33,
+    ),
+    $typography
+);
+
+@function typography($key) {
+    @return map-getter($typography, $key);
+}

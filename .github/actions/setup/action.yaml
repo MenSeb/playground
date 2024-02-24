@@ -1,0 +1,12 @@
+---
+name: Setup
+description: Setup workflow with NodeJS
+
+runs:
+    using: composite
+    steps:
+        - name: Setup NodeJS
+          uses: actions/setup-node@v4
+          with:
+              cache: npm
+              node-version: 18

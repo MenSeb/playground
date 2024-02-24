@@ -1,0 +1,31 @@
+<section class="section contact">
+    <h3 class="heading contact-heading">{{ contact.label }}</h3>
+    <div class="contact-infos">
+        {{#with contact.infos}}
+        <div class="contact-info contact-schedule">
+            {{>icon name="calendar" class="contact-icon" }}
+            <span class="contact-value">{{ schedule.value }}</span>
+        </div>
+        <a
+            class="link contact-info contact-email"
+            href="mailto:{{ email.value }}"
+        >
+            {{>icon name="email" class="contact-icon" }}
+            <span class="contact-value">{{ email.value }}</span>
+        </a>
+        <a class="link contact-info contact-phone" href="tel:{{ phone.value }}">
+            {{>icon name="phone" class="contact-icon" }}
+            <span class="contact-value">{{ phone.value }}</span>
+        </a>
+        <a
+            class="link contact-info contact-address"
+            href="{{ ../contact.maps }}"
+            rel="noopener noreferrer"
+            target="_blank"
+        >
+            {{>icon name="pin" class="contact-icon" }}
+            <span class="contact-value">{{ address.value }}</span>
+        </a>
+        {{/with}}
+    </div>
+</section>

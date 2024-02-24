@@ -1,0 +1,5 @@
+@use 'sass:meta';
+
+@function message($variable, $value, $values) {
+    @return 'Invalid #{$variable} {#{$value}} provided. Should be one of {#{$values}}.';
+}

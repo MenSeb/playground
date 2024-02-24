@@ -1,6 +1,5 @@
 import path from 'path';
 import dotenv from 'dotenv';
-import Handlebars from 'handlebars';
 import { merge } from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlBundlerPlugin from 'html-bundler-webpack-plugin';
@@ -10,13 +9,9 @@ import {
     PAGES_PATH,
     PARTIALS_PATH,
     registerPages,
-    registerPartials,
-    WatchPartialsPlugin,
 } from './src/client/index.js';
 
 dotenv.config();
-
-registerPartials(PARTIALS_PATH);
 
 export default merge(config, {
     devServer: {
@@ -37,17 +32,9 @@ export default merge(config, {
             paths: ['src/**/*'],
         },
     },
-    entry: path.resolve(__dirname, 'src/client/scripts/index.js'),
+    //entry: path.resolve(__dirname, 'src/client/scripts/index.js'), // <= don't define source JS here, you have already defined this JS file in the base.hbs
     module: {
         rules: [
-            {
-                test: /\.(hbs|html)$/,
-                loader: HtmlBundlerPlugin.loader,
-                options: {
-                    preprocessor: (content, { data }) =>
-                        Handlebars.compile(content)(data),
-                },
-            },
             {
                 test: /\.(css|s[ac]ss)$/,
                 use: ['css-loader', 'sass-loader'],
@@ -88,8 +75,30 @@ export default merge(config, {
             css: { filename: 'styles/index.[contenthash:8].css' },
             js: { filename: 'scripts/client/index.[contenthash:8].js' },
             entry: registerPages(PAGES_PATH),
+            // use the handlebars preprocessor
+            preprocessor: 'handlebars',
+            // handlebars options
+            preprocessorOptions: {
+                // Note: use the partials relative to the paths defined here,
+                // e.g. if in template is used `{{> menu/menu-button}}`,
+                // then is not needed to define the path `src/client/templates/partials/components/menu`.
+                // Here are defined all partials paths because in templates used partials names only,
+                // w/o a path relative to src/client/templates/partials/components.
+                // All partials in the paths (recurcive) will be watched, therefore don't needed the WatchPartialsPlugin()
+                partials: [
+                    PARTIALS_PATH,
+                    path.join(PARTIALS_PATH, 'components'),
+                    path.join(PARTIALS_PATH, 'components/menu'),
+                    path.join(PARTIALS_PATH, 'components/navigation'),
+                ],
+                // define custom helpers here
+                // note: the `assign` helper is already registered in the 'handlebars' preprocessor
+                helpers: {
+                    idx: (index) => index + 1,
+                    len: (object) => object.length,
+                },
+            },
         }),
-        new WatchPartialsPlugin(),
         new CopyPlugin({
             patterns: [
                 {

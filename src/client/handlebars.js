@@ -2,8 +2,8 @@ import Handlebars from 'handlebars';
 import fs from 'node:fs';
 import context from './context.json' assert { type: 'json' };
 
-export const PARTIALS_PATH = 'src/client/templates/partials/';
-export const PAGES_PATH = 'src/client/templates/pages/';
+export const PARTIALS_PATH = './src/client/templates/partials/';
+export const PAGES_PATH = './src/client/templates/pages/';
 
 export function callbackPartials(callback, partialsPath = PARTIALS_PATH) {
     const partials = fs.readdirSync(partialsPath);
@@ -66,14 +66,14 @@ export function registerPages(pagesPath) {
     return pages;
 }
 
-Handlebars.registerHelper('idx', (index) => index + 1);
+// This helpers shpould be defined in the `preprocessorOptions.helpers` options of the HtmlBundlerPlugin
+//Handlebars.registerHelper('idx', (index) => index + 1);
 
-Handlebars.registerHelper('len', (object) => object.length);
+//Handlebars.registerHelper('len', (object) => object.length);
 
-Handlebars.registerHelper('assign', function (key, val, options) {
-    if (options.data.root === undefined) {
-        options.data.root = {};
-    }
-
-    options.data.root[key] = val;
-});
+// Handlebars.registerHelper('assign', function (key, val, options) {
+//     if (options.data.root === undefined) {
+//         options.data.root = {};
+//     }
+//     options.data.root[key] = val;
+// });
